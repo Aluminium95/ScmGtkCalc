@@ -1,0 +1,11 @@
+# Répartition des fichiers
+	- callbacks.c
+		les callbacks gtk
+	- scm_functions.c 
+		les fonctions ajoutées 
+	- main.c 
+		lanceur du programme
+	- calc.h 
+		header de l'objet « calculette »
+	- calc.c
+		fonctions de l'objet « calculette »

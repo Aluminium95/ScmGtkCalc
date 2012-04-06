@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64px"
+   height="64px"
+   id="svg2985"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="Icon.svg"
+   inkscape:export-filename="/home/aluminium95/Code/C/GObject/ScmCalcGtk/DesktopIntegration/256.png"
+   inkscape:export-xdpi="360"
+   inkscape:export-ydpi="360">
+  <defs
+     id="defs2987" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="11"
+     inkscape:cx="26.991476"
+     inkscape:cy="31.5"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:document-units="px"
+     inkscape:grid-bbox="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1021"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <sodipodi:guide
+       orientation="1,0"
+       position="5.0140299,65.568083"
+       id="guide2985" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="59.075557,68.139381"
+       id="guide2995" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="-1.928473,59.13984"
+       id="guide2997" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="-13.885006,4.9497475"
+       id="guide2999" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata2990">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer">
+    <rect
+       style="fill:#00ffff;fill-opacity:1;stroke:#ff00ff;stroke-width:4;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3001"
+       width="54.061527"
+       height="54.190094"
+       x="5.01403"
+       y="4.8601599"
+       ry="4.909091"
+       rx="4.909091" />
+    <rect
+       style="fill:#00ffff;fill-opacity:1;stroke:#ff00ff;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3003"
+       width="44.443985"
+       height="8.818182"
+       x="10.272727"
+       y="11.090909"
+       rx="0"
+       ry="0" />
+    <rect
+       style="fill:#00ffff;fill-opacity:1;stroke:#ff00ff;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3773"
+       width="43.18182"
+       height="28.545454"
+       x="10.727273"
+       y="24.09091" />
+    <text
+       xml:space="preserve"
+       style="font-size:9.69670963px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Auctoritas;-inkscape-font-specification:Auctoritas"
+       x="22.212048"
+       y="40.181644"
+       id="text3775"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3777"
+         x="22.212048"
+         y="40.181644">(calc)</tspan></text>
+  </g>
+</svg>
