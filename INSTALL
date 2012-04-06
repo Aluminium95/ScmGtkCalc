@@ -1,0 +1,14 @@
+## INSTALL
+
+Pour installer il faut les 
+libs suivantes :
+	- gtk >= 3.0
+	- glib >= 2.0
+	- guile-1.8
+
+Après s'être assuré d'être en possession des libs,
+il ne reste que le bon vieux :
+	make &
+	sudo make install 
+
+(pas de ./configure pour l'instant ...)
