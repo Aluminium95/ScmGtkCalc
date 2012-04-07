@@ -62,5 +62,7 @@ void scmcalc_run (ScmCalc* scmcalc);
 
 void scmcalc_disp (ScmCalc* self, const gchar* action);
 void scmcalc_execute (ScmCalc* self, const gchar *action);
+void scmcalc_add_historique (ScmCalc* self, const gchar* action);
+void scmcalc_execute_save (ScmCalc* self, const gchar *action);
 
 #endif /* H_CALCULETTE */

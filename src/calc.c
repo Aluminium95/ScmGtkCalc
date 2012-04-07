@@ -216,12 +216,9 @@ scmcalc_execute (ScmCalc* self, const gchar *action)
 {
 	SCM result;
 	SCM rep;
-	//gchar *cmd_safe; /* Commande avec le catch autour */
 
 	gtk_label_set_label (self->prec_cmd, action);
 	
-	// cmd_safe = g_strdup_printf("(catch #t (lambda () %s) (lambda (key . args) args))", action);
-
 	result = scm_c_catch (SCM_BOOL_T,
                     wrapper_body_proc, (gpointer) action,
                     wrapper_handler_proc, (gpointer) self,
@@ -235,8 +232,19 @@ scmcalc_execute (ScmCalc* self, const gchar *action)
 		gtk_label_set_label (self->sortie, scm_to_locale_string (t));
 		
 		scm_c_define ("private-preced-var", rep);
-	}
+	}	
+}
 
+void 
+scmcalc_execute_save (ScmCalc* self, const gchar *action)
+{
+	scmcalc_execute (self, action);
+	scmcalc_add_historique (self, action);
+}
+
+void 
+scmcalc_add_historique (ScmCalc* self, const gchar *text)
+{
 	gint lines = gtk_text_buffer_get_line_count (self->historique);
 
 	GtkTextIter iter, start, end;
@@ -250,9 +258,7 @@ scmcalc_execute (ScmCalc* self, const gchar *action)
 	gtk_text_buffer_get_iter_at_line (self->historique, &iter, lines);
 	
 	gtk_text_buffer_insert (self->historique, &iter, gtk_entry_get_text(self->code), -1);
-
-	gtk_text_buffer_insert (self->historique, &iter, "\n", -1);
 	
-	//g_free (cmd_safe);
-}
+	gtk_text_buffer_insert (self->historique, &iter, "\n", -1);
 
+}

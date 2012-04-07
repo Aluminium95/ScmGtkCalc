@@ -70,6 +70,20 @@ cb_suppr (GtkButton *b, gpointer user_data)
 }
 
 void 
+cb_to_inexact (GtkButton* b, gpointer user_data) 
+{
+	ScmCalc* self = SCM_CALC (user_data);
+	scmcalc_execute (self, "(exact->inexact (precedent))");
+}
+
+void 
+cb_to_exact (GtkButton *b, gpointer user_data)
+{
+	ScmCalc* self = SCM_CALC (user_data);
+	scmcalc_execute (self, "(inexact->exact (precedent))");
+}
+
+void 
 cb_point (GtkButton *b, gpointer user_data) 
 {
 	const ScmCalc* self = SCM_CALC (user_data);
@@ -87,7 +101,7 @@ cb_executer (GtkButton* b, gpointer user_data)
 {
 	ScmCalc* self = SCM_CALC (user_data);
 	
-	scmcalc_execute (self, gtk_entry_get_text (self->code));
+	scmcalc_execute_save (self, gtk_entry_get_text (self->code));
 	
 	gtk_entry_set_text (self->code, "");
 }
