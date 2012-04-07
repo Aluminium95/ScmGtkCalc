@@ -277,7 +277,7 @@
                     <property name="xalign">0.94999998807907104</property>
                     <property name="invisible_char_set">True</property>
                     <property name="progress_pulse_step">0</property>
-                    <signal name="activate" handler="on_valider_clicked" swapped="no"/>
+                    <signal name="activate" handler="cb_executer" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -369,7 +369,7 @@
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="nombre_cb" swapped="no"/>
+                        <signal name="clicked" handler="cb_nombre" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -386,7 +386,7 @@
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="nombre_cb" swapped="no"/>
+                        <signal name="clicked" handler="cb_nombre" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -403,7 +403,7 @@
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="nombre_cb" swapped="no"/>
+                        <signal name="clicked" handler="cb_nombre" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -420,7 +420,7 @@
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="nombre_cb" swapped="no"/>
+                        <signal name="clicked" handler="cb_nombre" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -437,7 +437,7 @@
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="nombre_cb" swapped="no"/>
+                        <signal name="clicked" handler="cb_nombre" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -454,7 +454,7 @@
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="nombre_cb" swapped="no"/>
+                        <signal name="clicked" handler="cb_nombre" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -471,7 +471,7 @@
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="nombre_cb" swapped="no"/>
+                        <signal name="clicked" handler="cb_nombre" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -488,7 +488,7 @@
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="nombre_cb" swapped="no"/>
+                        <signal name="clicked" handler="cb_nombre" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -505,7 +505,7 @@
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="nombre_cb" swapped="no"/>
+                        <signal name="clicked" handler="cb_nombre" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -522,7 +522,7 @@
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="nombre_cb" swapped="no"/>
+                        <signal name="clicked" handler="cb_nombre" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -540,7 +540,7 @@
                         <property name="receives_default">False</property>
                         <property name="tooltip_text" translatable="yes">(+ nbr [...])</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="on_action_clicked" swapped="no"/>
+                        <signal name="clicked" handler="cb_plus" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">4</property>
@@ -558,7 +558,7 @@
                         <property name="receives_default">False</property>
                         <property name="tooltip_text" translatable="yes">(- nbr [...])</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="on_action_clicked" swapped="no"/>
+                        <signal name="clicked" handler="cb_moins" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">4</property>
@@ -576,7 +576,7 @@
                         <property name="receives_default">False</property>
                         <property name="tooltip_text" translatable="yes">(/ nbr [...])</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="on_action_clicked" swapped="no"/>
+                        <signal name="clicked" handler="cb_diviser" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">4</property>
@@ -594,7 +594,7 @@
                         <property name="receives_default">False</property>
                         <property name="tooltip_text" translatable="yes">(* nbr [...])</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="on_action_clicked" swapped="no"/>
+                        <signal name="clicked" handler="cb_multiplier" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">4</property>
@@ -605,24 +605,25 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="button_prec">
-                        <property name="label" translatable="yes">precedent</property>
+                        <property name="label">gtk-go-back</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="on_single_action_clicked" swapped="no"/>
+                        <property name="use_stock">True</property>
+                        <signal name="clicked" handler="cb_precedent" swapped="no"/>
                       </object>
                       <packing>
-                        <property name="left_attach">1</property>
+                        <property name="left_attach">2</property>
                         <property name="top_attach">5</property>
-                        <property name="width">2</property>
+                        <property name="width">1</property>
                         <property name="height">1</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkButton" id="button_sp">
-                        <property name="label" translatable="yes">Espace</property>
+                        <property name="label" translatable="yes" context="Put the &quot; &quot; character">Space</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -631,7 +632,7 @@
                         <property name="margin_left">5</property>
                         <property name="margin_right">5</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="add_space" swapped="no"/>
+                        <signal name="clicked" handler="cb_add_space" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">3</property>
@@ -651,7 +652,7 @@
                         <property name="margin_right">5</property>
                         <property name="use_action_appearance">False</property>
                         <property name="use_stock">True</property>
-                        <signal name="clicked" handler="on_valider_clicked" swapped="no"/>
+                        <signal name="clicked" handler="cb_executer" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">3</property>
@@ -662,14 +663,14 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="buton_expt">
-                        <property name="label" translatable="yes">expt</property>
+                        <property name="label" translatable="yes">x^y</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="tooltip_text" translatable="yes">(expt nbr pow)</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="on_action_clicked" swapped="no"/>
+                        <signal name="clicked" handler="cb_expt" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">5</property>
@@ -680,7 +681,7 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="button_sqrt">
-                        <property name="label" translatable="yes">sqrt</property>
+                        <property name="label" translatable="yes">Racine</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
@@ -689,7 +690,7 @@
                         <property name="tooltip_markup" translatable="yes">(sqrt nbr pow)</property>
                         <property name="tooltip_text" translatable="yes">(sqrt nbr pow)</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="on_action_clicked" swapped="no"/>
+                        <signal name="clicked" handler="cb_sqrt" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">5</property>
@@ -700,13 +701,13 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="button_square">
-                        <property name="label" translatable="yes">carre</property>
+                        <property name="label" translatable="yes">x²</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="on_action_clicked" swapped="no"/>
+                        <signal name="clicked" handler="cb_square" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">5</property>
@@ -717,12 +718,13 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="button_log">
-                        <property name="label" translatable="yes">log</property>
+                        <property name="label" translatable="yes">Log x</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="use_action_appearance">False</property>
+                        <signal name="clicked" handler="cb_log" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">5</property>
@@ -733,13 +735,13 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="button_sinus">
-                        <property name="label" translatable="yes">sin</property>
+                        <property name="label" translatable="yes">Sin</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="on_action_clicked" swapped="no"/>
+                        <signal name="clicked" handler="cb_sinus" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">6</property>
@@ -750,13 +752,13 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="button_cosinus">
-                        <property name="label" translatable="yes">cos</property>
+                        <property name="label" translatable="yes">Cos</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="on_action_clicked" swapped="no"/>
+                        <signal name="clicked" handler="cb_cosinus" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">6</property>
@@ -767,13 +769,14 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="button_tan">
-                        <property name="label" translatable="yes">tan</property>
+                        <property name="label" translatable="yes">Tan</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="use_action_appearance">False</property>
                         <property name="relief">half</property>
+                        <signal name="clicked" handler="cb_tan" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">6</property>
@@ -784,12 +787,13 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="button_pi">
-                        <property name="label" translatable="yes">pi</property>
+                        <property name="label" translatable="yes">π</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="use_action_appearance">False</property>
+                        <signal name="clicked" handler="cb_pi" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">6</property>
@@ -800,12 +804,13 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="button_arcsinus">
-                        <property name="label" translatable="yes">asin</property>
+                        <property name="label" translatable="yes">ASin</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="use_action_appearance">False</property>
+                        <signal name="clicked" handler="cb_asinus" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">7</property>
@@ -816,12 +821,13 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="button_arcosinus">
-                        <property name="label" translatable="yes">acos</property>
+                        <property name="label" translatable="yes">ACos</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="use_action_appearance">False</property>
+                        <signal name="clicked" handler="cb_acosinus" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">7</property>
@@ -832,12 +838,13 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="button_arctan">
-                        <property name="label" translatable="yes">atan</property>
+                        <property name="label" translatable="yes">ATan</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="use_action_appearance">False</property>
+                        <signal name="clicked" handler="cb_atan" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">7</property>
@@ -895,7 +902,38 @@
                       <placeholder/>
                     </child>
                     <child>
-                      <placeholder/>
+                      <object class="GtkButton" id="button_point">
+                        <property name="label" translatable="yes">.</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="receives_default">False</property>
+                        <property name="use_action_appearance">False</property>
+                        <signal name="clicked" handler="cb_point" swapped="no"/>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">5</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="button_suppr">
+                        <property name="label" translatable="yes">←</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="receives_default">False</property>
+                        <property name="use_action_appearance">False</property>
+                        <signal name="clicked" handler="cb_suppr" swapped="no"/>
+                      </object>
+                      <packing>
+                        <property name="left_attach">2</property>
+                        <property name="top_attach">1</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
                     </child>
                   </object>
                   <packing>

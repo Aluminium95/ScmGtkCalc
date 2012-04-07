@@ -25,21 +25,55 @@
 #include <libguile.h>
 #include "calc.h"
 
-/* Called when the window is closed */
+/** 
+ * Basic functions 
+ */
+void scm_disp_action (const gchar* action, const ScmCalc* self);
+void scm_execute_action (const gchar *action, const ScmCalc* self);
+
+/**
+ * Window CB
+ */
 void destroy (GtkWidget *widget, gpointer data);
 
-void disp_action (const gchar* action, const ScmCalc* self);
+/**
+ * Globales
+ */
+void cb_add_space (GtkButton *b, gpointer user);
+void cb_nombre (GtkButton *b, gpointer user_data);
+void cb_point (GtkButton *b, gpointer user_data);
+void cb_executer (GtkButton* b, gpointer user_data);
+void cb_suppr (GtkButton* b, gpointer user_data);
 
-void add_space (GObject *b, gpointer user);
+/**
+ * Opérations simples (-+/*)
+ */
+void cb_multiplication (GtkButton* b, gpointer user_data);
+void cb_division (GtkButton* b, gpointer user_data);
+void cb_plus (GtkButton* b, gpointer user_data);
+void cb_moins (GtkButton* b, gpointer user_data);
 
-void on_action_clicked (GtkButton* b, gpointer user_data);
+/**
+ * Trigo
+ */
+void cb_sinus (GtkButton*b, gpointer user_data);
+void cb_asinus (GtkButton*b, gpointer user_data);
+void cb_cosinus (GtkButton*b, gpointer user_data);
+void cb_acosinus (GtkButton*b, gpointer user_data);
+void cb_tan (GtkButton*b, gpointer user_data);
+void cb_atan (GtkButton*b, gpointer user_data);
+void cb_pi (GtkButton*b, gpointer user_data);
 
-void on_single_action_clicked (GtkButton* b, gpointer data);
+/**
+ * Powers !
+ */
+void cb_expt (GtkButton*b, gpointer user_data);
+void cb_log (GtkButton*b, gpointer user_data);
+void cb_carre (GtkButton*b, gpointer user_data);
+void cb_sqrt (GtkButton*b, gpointer user_data);
 
-void nombre_cb (GtkButton *b, gpointer user_data);
 
-void on_valider_clicked (GObject* b, gpointer user_data);
 
-void execute_action (const gchar *action, const ScmCalc* self);
+
 
 #endif /* H_CALCULETTE_CB */

@@ -19,19 +19,23 @@
 #include "callbacks.h"
 
 
-/* Called when the window is closed */
+/**
+ * Quand la fenetre quitte
+ */
 void
 destroy (GtkWidget *widget, gpointer data)
 {
 	gtk_main_quit ();
 }
 
-
+/**
+ * Affiche une action sur l'afficheur
+ */
 void 
-disp_action (const gchar* action, const ScmCalc *self)
+scm_disp_action (const gchar* action, const ScmCalc *self)
 {
 	
-	gchar* cmd = g_strdup_printf("(%s )", action);
+	gchar* cmd = g_strdup_printf("(%s)", action);
 	
 	gint pos = gtk_editable_get_position (GTK_EDITABLE (self->code));
 
@@ -42,8 +46,11 @@ disp_action (const gchar* action, const ScmCalc *self)
 	g_free (cmd);
 }
 
+/**
+ * Ajoute un espace 
+ */
 void 
-add_space (GObject *b, gpointer user)
+cb_add_space (GtkButton *b, gpointer user)
 {
 	const ScmCalc* self = SCM_CALC (user);
 	
@@ -54,32 +61,11 @@ add_space (GObject *b, gpointer user)
 	gtk_editable_set_position (GTK_EDITABLE (self->code), pos);
 }
 
+/**
+ * Affiche un nombre 
+ */
 void 
-on_action_clicked (GtkButton* b, gpointer user_data) 
-{
-	const ScmCalc* self = SCM_CALC (user_data);
-	const gchar* action = gtk_button_get_label (b);
-	disp_action (action,self);
-}
-
-void 
-on_single_action_clicked (GtkButton* b, gpointer data) 
-{
-	const ScmCalc* self = SCM_CALC (data);
-	const gchar* action = gtk_button_get_label (b);
-	
-	gint pos = gtk_editable_get_position (GTK_EDITABLE (self->code));
-	
-	gchar* cmd = g_strdup_printf ("(%s)", action);
-	
-	gtk_editable_insert_text (GTK_EDITABLE (self->code), cmd, -1, &pos);
-	gtk_editable_set_position (GTK_EDITABLE (self->code), pos);
-	
-	g_free (cmd);
-}
-
-void 
-nombre_cb (GtkButton *b, gpointer user_data) 
+cb_nombre (GtkButton *b, gpointer user_data) 
 {
 	const ScmCalc* self = SCM_CALC (user_data);
 	
@@ -90,18 +76,45 @@ nombre_cb (GtkButton *b, gpointer user_data)
 	g_free (cmd);
 }
 
-void
-on_valider_clicked (GObject* b, gpointer user_data) 
+void 
+cb_suppr (GtkButton *b, gpointer user_data) 
+{
+	const ScmCalc* self = SCM_CALC (user_data);
+	GtkEntryBuffer* buf = gtk_entry_get_buffer (self->code);
+	
+	gint pos = gtk_editable_get_position (GTK_EDITABLE (self->code));
+	gtk_entry_buffer_delete_text (buf, pos - 1, pos);
+	gtk_editable_set_position (GTK_EDITABLE (self->code), pos - 1);
+}
+
+void 
+cb_point (GtkButton *b, gpointer user_data) 
 {
 	const ScmCalc* self = SCM_CALC (user_data);
 	
-	execute_action (gtk_entry_get_text (self->code), self);
+	gint pos = gtk_editable_get_position (GTK_EDITABLE (self->code));
+	gtk_editable_insert_text (GTK_EDITABLE (self->code), ".", -1, &pos);
+	gtk_editable_set_position (GTK_EDITABLE (self->code), pos);
+}
+
+/**
+ * Execute la commande
+ */
+void
+cb_executer (GtkButton* b, gpointer user_data) 
+{
+	const ScmCalc* self = SCM_CALC (user_data);
+	
+	scm_execute_action (gtk_entry_get_text (self->code), self);
 	
 	gtk_entry_set_text (self->code, "");
 }
 
+/**
+ * Execute la commande
+ */
 void 
-execute_action (const gchar *action, const ScmCalc* self) 
+scm_execute_action (const gchar *action, const ScmCalc* self) 
 {
 	SCM result;
 	SCM rep;
@@ -139,3 +152,103 @@ execute_action (const gchar *action, const ScmCalc* self)
 	gtk_text_buffer_insert (self->historique, &iter, "\n", -1);
 }
 
+void cb_precedent (GtkButton* b, gpointer user_data)
+{
+	const ScmCalc* self = SCM_CALC (user_data);
+	scm_disp_action (_("precedent"), self);
+	
+	gint pos = gtk_editable_get_position (GTK_EDITABLE (self->code));
+	gtk_editable_set_position (GTK_EDITABLE (self->code), pos + 1);
+}
+
+void cb_multiplier (GtkButton* b, gpointer user_data)
+{
+	const ScmCalc* self = SCM_CALC (user_data);
+	scm_disp_action ("* ", self);
+}
+
+void cb_diviser (GtkButton* b, gpointer user_data)
+{
+	const ScmCalc* self = SCM_CALC (user_data);
+	scm_disp_action ("/ ", self);
+}
+
+void cb_plus (GtkButton* b, gpointer user_data)
+{
+	const ScmCalc* self = SCM_CALC (user_data);
+	scm_disp_action ("+ ", self);
+}
+
+void cb_moins (GtkButton* b, gpointer user_data)
+{
+	const ScmCalc* self = SCM_CALC (user_data);
+	scm_disp_action ("- ", self);
+}
+
+void cb_expt (GtkButton* b, gpointer user_data)
+{
+	const ScmCalc* self = SCM_CALC (user_data);
+	scm_disp_action ("expt ", self);
+}
+
+void cb_log (GtkButton* b, gpointer user_data)
+{
+	const ScmCalc* self = SCM_CALC (user_data);
+	scm_disp_action ("log ", self);
+}
+
+void cb_square (GtkButton* b, gpointer user_data)
+{
+	const ScmCalc* self = SCM_CALC (user_data);
+	scm_disp_action ("carre ", self);
+}
+
+void cb_sqrt (GtkButton* b, gpointer user_data)
+{
+	const ScmCalc* self = SCM_CALC (user_data);
+	scm_disp_action ("sqrt ", self);
+}
+
+void cb_sinus (GtkButton* b, gpointer user_data)
+{
+	const ScmCalc* self = SCM_CALC (user_data);
+	scm_disp_action ("sin ", self);
+}
+
+void cb_cosinus (GtkButton* b, gpointer user_data)
+{
+	const ScmCalc* self = SCM_CALC (user_data);
+	scm_disp_action ("cos ", self);
+}
+
+void cb_tan (GtkButton* b, gpointer user_data)
+{
+	const ScmCalc* self = SCM_CALC (user_data);
+	scm_disp_action ("tan ", self);
+}
+
+void cb_asinus (GtkButton* b, gpointer user_data)
+{
+	const ScmCalc* self = SCM_CALC (user_data);
+	scm_disp_action ("asin ", self);
+}
+
+void cb_acosinus (GtkButton* b, gpointer user_data)
+{
+	const ScmCalc* self = SCM_CALC (user_data);
+	scm_disp_action ("acos ", self);
+}
+
+void cb_atan (GtkButton* b, gpointer user_data)
+{
+	const ScmCalc* self = SCM_CALC (user_data);
+	scm_disp_action ("atan ", self);
+}
+
+void cb_pi (GtkButton* b, gpointer user_data)
+{
+	const ScmCalc* self = SCM_CALC (user_data);
+	scm_disp_action ("pi", self);
+	gint pos = gtk_editable_get_position (GTK_EDITABLE (self->code));
+	gtk_editable_set_position (GTK_EDITABLE (self->code), pos + 1);
+}
