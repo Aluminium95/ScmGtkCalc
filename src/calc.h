@@ -23,6 +23,7 @@
 
 #include <gtk/gtk.h>
 #include <glib-object.h>
+#include <glib/gi18n.h>
 #include <libguile.h>
 #include "scm_functions.h"
 

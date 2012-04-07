@@ -51,11 +51,15 @@ scmcalc_init (ScmCalc *self)
 	
 	scm_c_define ("private-preced-var", scm_from_int (0));
 	
-	scm_c_eval_string ("(define (precedent) private-preced-var)");
+	gchar * cmd = g_strconcat ("(define (", _("precedent"), ") private-preced-var)", NULL);
+	
+	scm_c_eval_string (cmd);
 	
 	self->window = scmcalc_create_window (self);
 	
 	gtk_widget_show (self->window);
+	
+	g_free (cmd);
 	
 	g_return_if_fail (self != NULL);
 }
@@ -102,6 +106,7 @@ scmcalc_create_window (ScmCalc *self)
 	GtkBuilder *builder;
 	GtkTextView* h;
 	GError* error = NULL;
+	gchar *widget_missing = _("Widget \"%s\" is missing in file %s.");
 
 	/* Load UI from file */
 	builder = gtk_builder_new ();
@@ -118,7 +123,7 @@ scmcalc_create_window (ScmCalc *self)
 	window = GTK_WIDGET (gtk_builder_get_object (builder, "window"));
         if (!window)
         {
-                g_critical ("Widget \"%s\" is missing in file %s.",
+                g_critical ( widget_missing,
 				"window",
 				UI_FILE);
 		}
@@ -126,7 +131,7 @@ scmcalc_create_window (ScmCalc *self)
 	self->sortie = GTK_LABEL (gtk_builder_get_object (builder, "sortie"));
         if (!self->sortie)
         {
-                g_critical ("Widget \"%s\" is missing in file %s.",
+                g_critical (widget_missing,
 				"sortie",
 				UI_FILE);
 		}
@@ -134,7 +139,7 @@ scmcalc_create_window (ScmCalc *self)
 	self->code = GTK_ENTRY (gtk_builder_get_object (builder, "code"));
         if (!self->code)
         {
-                g_critical ("Widget \"%s\" is missing in file %s.",
+                g_critical (widget_missing,
 				"code",
 				UI_FILE);
 		}
@@ -142,7 +147,7 @@ scmcalc_create_window (ScmCalc *self)
 	h = GTK_TEXT_VIEW (gtk_builder_get_object (builder, "historique"));
         if (!h)
         {
-                g_critical ("Widget \"%s\" is missing in file %s.",
+                g_critical (widget_missing,
 				"historique",
 				UI_FILE);
 		}
@@ -150,7 +155,7 @@ scmcalc_create_window (ScmCalc *self)
 	self->prec_cmd = GTK_LABEL (gtk_builder_get_object (builder, "prec_cmd"));
         if (!self->prec_cmd)
         {
-                g_critical ("Widget \"%s\" is missing in file %s.",
+                g_critical (widget_missing,
 				"prec_cmd",
 				UI_FILE);
 		}
@@ -162,9 +167,11 @@ scmcalc_create_window (ScmCalc *self)
 	gtk_window_set_icon_from_file (GTK_WINDOW(window), DATA "/icon.png", &error);
 	
 	if (error != NULL) {
-		g_critical ("Ne peut faire l'icone : %s !\n",
+		g_critical (_("Ne peut définir l'icone : %s !\n"),
 				error->message);
 	}
+	
+	g_free (widget_missing);
 	
 	return window;
 }
