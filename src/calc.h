@@ -60,4 +60,7 @@ ScmCalc* scmcalc_new ();
 void scmcalc_free (ScmCalc* scmcalc);
 void scmcalc_run (ScmCalc* scmcalc);
 
+void scmcalc_disp (ScmCalc* self, const gchar* action);
+void scmcalc_execute (ScmCalc* self, const gchar *action);
+
 #endif /* H_CALCULETTE */

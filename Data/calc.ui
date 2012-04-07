@@ -543,7 +543,7 @@
                         <signal name="clicked" handler="cb_plus" swapped="no"/>
                       </object>
                       <packing>
-                        <property name="left_attach">4</property>
+                        <property name="left_attach">3</property>
                         <property name="top_attach">2</property>
                         <property name="width">1</property>
                         <property name="height">1</property>
@@ -561,7 +561,7 @@
                         <signal name="clicked" handler="cb_moins" swapped="no"/>
                       </object>
                       <packing>
-                        <property name="left_attach">4</property>
+                        <property name="left_attach">3</property>
                         <property name="top_attach">3</property>
                         <property name="width">1</property>
                         <property name="height">1</property>
@@ -579,7 +579,7 @@
                         <signal name="clicked" handler="cb_diviser" swapped="no"/>
                       </object>
                       <packing>
-                        <property name="left_attach">4</property>
+                        <property name="left_attach">3</property>
                         <property name="top_attach">4</property>
                         <property name="width">1</property>
                         <property name="height">1</property>
@@ -597,7 +597,7 @@
                         <signal name="clicked" handler="cb_multiplier" swapped="no"/>
                       </object>
                       <packing>
-                        <property name="left_attach">4</property>
+                        <property name="left_attach">3</property>
                         <property name="top_attach">5</property>
                         <property name="width">1</property>
                         <property name="height">1</property>
@@ -629,16 +629,14 @@
                         <property name="can_focus">False</property>
                         <property name="receives_default">True</property>
                         <property name="double_buffered">False</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
                         <property name="use_action_appearance">False</property>
                         <signal name="clicked" handler="cb_add_space" swapped="no"/>
                       </object>
                       <packing>
-                        <property name="left_attach">3</property>
-                        <property name="top_attach">2</property>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">1</property>
                         <property name="width">1</property>
-                        <property name="height">2</property>
+                        <property name="height">1</property>
                       </packing>
                     </child>
                     <child>
@@ -655,10 +653,10 @@
                         <signal name="clicked" handler="cb_executer" swapped="no"/>
                       </object>
                       <packing>
-                        <property name="left_attach">3</property>
-                        <property name="top_attach">4</property>
+                        <property name="left_attach">4</property>
+                        <property name="top_attach">1</property>
                         <property name="width">1</property>
-                        <property name="height">2</property>
+                        <property name="height">5</property>
                       </packing>
                     </child>
                     <child>
@@ -854,54 +852,6 @@
                       </packing>
                     </child>
                     <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
                       <object class="GtkButton" id="button_point">
                         <property name="label" translatable="yes">.</property>
                         <property name="use_action_appearance">False</property>
@@ -934,6 +884,48 @@
                         <property name="width">1</property>
                         <property name="height">1</property>
                       </packing>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
                     </child>
                   </object>
                   <packing>

@@ -25,12 +25,6 @@
 #include <libguile.h>
 #include "calc.h"
 
-/** 
- * Basic functions 
- */
-void scm_disp_action (const gchar* action, const ScmCalc* self);
-void scm_execute_action (const gchar *action, const ScmCalc* self);
-
 /**
  * Window CB
  */

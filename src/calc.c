@@ -27,6 +27,8 @@ static void scmcalc_finalize (GObject *self);
 static void scmcalc_class_init (ScmCalcClass* klass);
 static void scmcalc_init (ScmCalc* self);
 static GtkWidget* scmcalc_create_window (ScmCalc *self);
+SCM wrapper_body_proc (gpointer data);
+SCM wrapper_handler_proc (gpointer data, SCM key, SCM param);
 
 /**
  * Création de la classe 
@@ -106,13 +108,13 @@ scmcalc_create_window (ScmCalc *self)
 	GtkBuilder *builder;
 	GtkTextView* h;
 	GError* error = NULL;
-	gchar *widget_missing = _("Widget \"%s\" is missing in file %s.");
+	const gchar *widget_missing = _("Widget \"%s\" is missing in file %s.");
 
 	/* Load UI from file */
 	builder = gtk_builder_new ();
 	if (!gtk_builder_add_from_file (builder, UI_FILE, &error))
 	{
-		g_critical ("Couldn't load builder file: %s", error->message);
+		g_critical (_("Couldn't load builder file: %s"), error->message);
 		g_error_free (error);
 	}
 
@@ -167,12 +169,90 @@ scmcalc_create_window (ScmCalc *self)
 	gtk_window_set_icon_from_file (GTK_WINDOW(window), DATA "/icon.png", &error);
 	
 	if (error != NULL) {
-		g_critical (_("Ne peut définir l'icone : %s !\n"),
+		g_critical (_("Couldn't set application icon : %s !\n"),
 				error->message);
 	}
 	
-	g_free (widget_missing);
-	
 	return window;
+}
+
+void 
+scmcalc_disp (ScmCalc *self, const gchar* action)
+{
+	
+	gchar* cmd = g_strdup_printf("(%s)", action);
+	
+	gint pos = gtk_editable_get_position (GTK_EDITABLE (self->code));
+
+	gtk_editable_insert_text (GTK_EDITABLE (self->code), cmd, -1, &pos);
+
+	gtk_editable_set_position (GTK_EDITABLE (self->code), pos - 1);
+
+	g_free (cmd);
+}
+
+
+
+SCM
+wrapper_body_proc (gpointer data)
+{
+	gchar* cmd = (gchar*) data;
+	return scm_c_eval_string (cmd);
+}
+
+SCM
+wrapper_handler_proc (gpointer data, SCM key, SCM param)
+{
+	ScmCalc* self = SCM_CALC (data);
+	gtk_label_set_label (self->sortie, "Erreur Syntaxe !");
+	return SCM_BOOL_F;
+}
+
+/**
+ * Execute la commande
+ */
+void 
+scmcalc_execute (ScmCalc* self, const gchar *action) 
+{
+	SCM result;
+	SCM rep;
+	//gchar *cmd_safe; /* Commande avec le catch autour */
+
+	gtk_label_set_label (self->prec_cmd, action);
+	
+	// cmd_safe = g_strdup_printf("(catch #t (lambda () %s) (lambda (key . args) args))", action);
+
+	result = scm_c_catch (SCM_BOOL_T,
+                    wrapper_body_proc, (gpointer) action,
+                    wrapper_handler_proc, (gpointer) self,
+                    NULL, NULL);
+	
+	if (scm_is_number (result)) {
+		rep = result;
+
+		SCM t = scm_number_to_string (rep, scm_from_int (10));
+	
+		gtk_label_set_label (self->sortie, scm_to_locale_string (t));
+		
+		scm_c_define ("private-preced-var", rep);
+	}
+
+	gint lines = gtk_text_buffer_get_line_count (self->historique);
+
+	GtkTextIter iter, start, end;
+	
+	if (lines >= 10) {
+		gtk_text_buffer_get_iter_at_line (self->historique, &start, 0);
+		gtk_text_buffer_get_iter_at_line (self->historique, &end, 1);
+		gtk_text_buffer_delete (self->historique, &start, &end);
+	}
+
+	gtk_text_buffer_get_iter_at_line (self->historique, &iter, lines);
+	
+	gtk_text_buffer_insert (self->historique, &iter, gtk_entry_get_text(self->code), -1);
+
+	gtk_text_buffer_insert (self->historique, &iter, "\n", -1);
+	
+	//g_free (cmd_safe);
 }
 
