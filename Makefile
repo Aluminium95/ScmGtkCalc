@@ -1,5 +1,7 @@
 PROGRAM = gtkcalc
 
+DOC_MODULE=gtkcalc
+
 # Sources Files
 SRC = 	"src"/*.c 
 
@@ -32,9 +34,17 @@ clean:
 	
 
 # Cible basique
+.PHONY : all
 all:
+	gtkdoc-scan --module=$(DOC_MODULE) --source-dir=./src --output-dir=Doc
+	# gtkdoc-scangobj --module=$(DOC_MODULE) 
+	cd Doc && gtkdoc-mkdb --module=$(DOC_MODULE) --output-format=xml && cd html && gtkdoc-mkhtml $(DOC_MODULE) ../$(DOC_MODULE)-docs.xml && cd .. &&  gtkdoc-fixxref --module=$(DOC_MODULE) --module-dir=html
+	
 	$(CC) $(OPTS) $(SRC) -o Build/$(PROGRAM) $(PKGS) $(CONFIG)
 	
+.PHONY : static
+static:
+	$(CC) -static --enable-static-link --disable-shared $(OPTS) $(SRC) -o Build/$(PROGRAM) $(PKGS) $(CONFIG)
 
 # Installe sur le système !
 .PHONY : install

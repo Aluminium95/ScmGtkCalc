@@ -26,8 +26,16 @@
 #include "calc.h"
 
 /**
- * Window CB
- */
+ * foo_get_bar:
+ * @foo: some foo
+ *
+ * Retrieves @foo's bar.
+ *
+ * Returns: @foo's bar
+ *
+ * Since: 2.6
+ * Deprecated: 2.12: Use foo_baz_get_bar() instead.
+ **/
 void destroy (GtkWidget *widget, gpointer data);
 
 /**

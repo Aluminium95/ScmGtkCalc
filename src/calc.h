@@ -37,11 +37,19 @@
 typedef struct _ScmCalc ScmCalc;
 typedef struct _ScmCalcClass ScmCalcClass;
 
+/**
+ * ScmCalc:
+ *
+ * @window: some #GtkWidget ... 
+ * @code: the #GtkLabel where the output is displayed 
+ * @prec_cmd: the #GtkLabel where the precedent command is displayed
+ * @code: the #GtkEntry where the user sets the commands
+ *
+ * This is the best widget, ever.
+ */
 struct _ScmCalc {
 	GObject parent;
 	GtkWidget *window;
-	
-	SCM rep;
 	
 	GtkEntry* code;
 	GtkLabel* prec_cmd;
@@ -49,6 +57,12 @@ struct _ScmCalc {
 	GtkTextBuffer* historique;
 };
 
+/**
+ * ScmCalcClass:
+ * @parent: some #GObjectClass
+ *
+ * This is the best widget, ever.
+ */
 struct _ScmCalcClass {
 	GObjectClass parent;
 };

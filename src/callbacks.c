@@ -20,7 +20,17 @@
 
 
 /**
- * Quand la fenetre quitte
+ * identifier:
+ *
+ * documentation ...
+ *
+ * # Sub heading #
+ *
+ * more documentation:
+ * - list item 1
+ * - list item 2
+ *
+ * Even more docs.
  */
 void
 destroy (GtkWidget *widget, gpointer data)

@@ -76,8 +76,20 @@ scmcalc_finalize (GObject *self_object)
 	
 }
 
-/** 
- * Retourne un nouvel objet
+/**
+ * scmcalc_new:
+ *
+ * Creates a newly allocated ScmCalc
+ *
+ * Returns: #ScmCalc*
+ *
+ * # Sub heading #
+ *
+ * more documentation:
+ * - list item 1
+ * - list item 2
+ *
+ * Even more docs.
  */
 ScmCalc*
 scmcalc_new ()
@@ -87,7 +99,11 @@ scmcalc_new ()
 }
 
 /**
- * Libère un objet
+ * scmcalc_free:
+ *
+ * Deletes a #ScmCalc
+ *
+ * @scmcalc: the #ScmCalc to delete, can be NULL
  */
 void 
 scmcalc_free (ScmCalc* scmcalc)
@@ -176,6 +192,15 @@ scmcalc_create_window (ScmCalc *self)
 	return window;
 }
 
+
+/**
+ * scmcalc_disp:
+ *
+ * Displays the action on the #GtkEntry with parenthesis around
+ *
+ * @self : #ScmCalc to set
+ * @action : the string to display (without the parenthesis)
+ */
 void 
 scmcalc_disp (ScmCalc *self, const gchar* action)
 {
@@ -190,7 +215,6 @@ scmcalc_disp (ScmCalc *self, const gchar* action)
 
 	g_free (cmd);
 }
-
 
 
 SCM
@@ -209,7 +233,12 @@ wrapper_handler_proc (gpointer data, SCM key, SCM param)
 }
 
 /**
- * Execute la commande
+ * scmcalc_execute:
+ *
+ * Execute the action passed
+ *
+ * @self : #ScmCalc to infer
+ * @ation : the action to be executed
  */
 void 
 scmcalc_execute (ScmCalc* self, const gchar *action) 
@@ -235,6 +264,16 @@ scmcalc_execute (ScmCalc* self, const gchar *action)
 	}	
 }
 
+/**
+ * scmcalc_execute_save:
+ *
+ * The same as scmcalc_execute() except that it
+ * saves the command in the command-history with 
+ * scmcalc_add_historique() 
+ *
+ * @self : #ScmCalc to infer
+ * @ation : the action to be executed
+ */
 void 
 scmcalc_execute_save (ScmCalc* self, const gchar *action)
 {
@@ -242,6 +281,14 @@ scmcalc_execute_save (ScmCalc* self, const gchar *action)
 	scmcalc_add_historique (self, action);
 }
 
+/**
+ * scmcalc_add_historique:
+ *
+ * Saves the command in the command history 
+ *
+ * @self : #ScmCalc to infer
+ * @ation : the action to be saved
+ */
 void 
 scmcalc_add_historique (ScmCalc* self, const gchar *text)
 {
