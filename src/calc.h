@@ -39,7 +39,6 @@ typedef struct _ScmCalcClass ScmCalcClass;
 
 /**
  * ScmCalc:
- *
  * @window: some #GtkWidget ... 
  * @code: the #GtkLabel where the output is displayed 
  * @prec_cmd: the #GtkLabel where the precedent command is displayed
@@ -48,9 +47,9 @@ typedef struct _ScmCalcClass ScmCalcClass;
  * This is the best widget, ever.
  */
 struct _ScmCalc {
+	/* public */
 	GObject parent;
 	GtkWidget *window;
-	
 	GtkEntry* code;
 	GtkLabel* prec_cmd;
 	GtkLabel* sortie;
@@ -64,6 +63,7 @@ struct _ScmCalc {
  * This is the best widget, ever.
  */
 struct _ScmCalcClass {
+	/* public */
 	GObjectClass parent;
 };
 
@@ -76,7 +76,9 @@ void scmcalc_run (ScmCalc* scmcalc);
 
 void scmcalc_disp (ScmCalc* self, const gchar* action);
 void scmcalc_execute (ScmCalc* self, const gchar *action);
+
 void scmcalc_add_historique (ScmCalc* self, const gchar* action);
+
 void scmcalc_execute_save (ScmCalc* self, const gchar *action);
 
 #endif /* H_CALCULETTE */
