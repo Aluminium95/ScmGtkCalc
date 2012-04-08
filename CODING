@@ -1,11 +1,18 @@
 # Répartition des fichiers
-	- callbacks.c
-		les callbacks gtk
-	- scm_functions.c 
-		les fonctions ajoutées 
+	- callbacks.c / h
+		Tous les callbacks de l'interface GTK
+		Ex : toutes les fonctions pour gérer les boutons de la calculette
+		
+	- scm_functions.c / h
+		les fonctions ajoutées au Scheme
+		Edit : Maintenant c'est plutôt déprécié ... Utiliser des véritable fichiers scripts modifiables à la place
+		et les placer dans Data/Scheme
+		
 	- main.c 
-		lanceur du programme
-	- calc.h 
-		header de l'objet « calculette »
-	- calc.c
-		fonctions de l'objet « calculette »
+		lanceur du programme ... Rien à redire, c'est juste une fonction main 
+		
+	- calc.c / h 
+		C'est l'Objet GObject qui représente la totalité de la calculette.
+		Il est instancié dans le main.c 
+		Il exécute les fonctions entrées dans l'UI (et répercutées sur lui par les callbacks).
+		Il gère l'historique, et bientôt les fonctions définies par l'utilisateur.

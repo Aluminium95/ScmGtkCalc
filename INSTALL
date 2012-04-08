@@ -6,9 +6,12 @@ libs suivantes :
 	- glib >= 2.0
 	- guile-1.8
 
+Attention : gmodule-export-2.0 est nécessaire !
+Il n'est pas disponible sous Windows ... Pour l'instant il n'y a aucune alternative
+
 Après s'être assuré d'être en possession des libs,
 il ne reste que le bon vieux :
-	make &
+	make all &
 	sudo make install 
 
 (pas de ./configure pour l'instant ...)
