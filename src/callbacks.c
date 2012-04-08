@@ -31,7 +31,9 @@ destroy (GtkWidget *widget, gpointer data)
 }
 
 /**
- * Callback about dialog 
+ * cb_about_dialog:
+ * 
+ * Callback qui crée la fenêtre About de la calculette
  */
 void 
 cb_about_dialog (GtkWidget *widget, gpointer data)

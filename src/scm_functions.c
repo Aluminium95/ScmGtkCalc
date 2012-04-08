@@ -18,12 +18,25 @@
  */
 #include "scm_functions.h"
 
+/**
+ * scm_return_rep:
+ * 
+ * Retourne le dernier résultat,
+ * celui-ci étant sauvegardé dans "private-preced-var"
+ */
 SCM
 scm_return_rep ()
 {
 	return scm_c_lookup ("private-preced-var");
 }
 
+
+/**
+ * scm_carre:
+ * @nbr : le nombre à élever au carré
+ *
+ * Returns: @nbr * @nbr 
+ */
 SCM
 scm_carre (SCM nbr) 
 {

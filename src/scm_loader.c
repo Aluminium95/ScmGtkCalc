@@ -42,7 +42,15 @@ wrapper_handler_proc (gpointer data, SCM key, SCM param)
 	return SCM_BOOL_F;
 }
 
-
+/**
+ * load_scm_file:
+ * @btn : le bouton [inutilisé]
+ * @data : [inutilisé]
+ *
+ * Charge un fichier scm dans l'interprêteur
+ * afin que les fonctions soit chargées globalement
+ * pour toute la calculette
+ */
 void
 load_scm_file (GObject* btn, gpointer data)
 {

@@ -31,7 +31,11 @@ static SCM wrapper_body_proc (gpointer data);
 static SCM wrapper_handler_proc (gpointer data, SCM key, SCM param);
 
 /**
- * Création de la classe 
+ * scmcalc_class_init:
+ * @klass : #ScmCalcClass
+ *
+ * Initialise la classe  
+ *
  */
 static void
 scmcalc_class_init (ScmCalcClass *klass) 
@@ -42,7 +46,10 @@ scmcalc_class_init (ScmCalcClass *klass)
 }
 
 /**
- * Création d'un objet
+ * scmcalc_init:
+ * @self : Un objet #ScmCalc qui va être initialisé
+ *
+ * Initialise l'objet
  */
 static void
 scmcalc_init (ScmCalc *self) 
@@ -67,7 +74,11 @@ scmcalc_init (ScmCalc *self)
 }
 
 /**
- * Destruction d'un objet
+ * scmcalc_finalize:
+ * @self_object
+ *
+ * Détruit l'objet
+ * 
  */
 static void 
 scmcalc_finalize (GObject *self_object)
@@ -82,14 +93,6 @@ scmcalc_finalize (GObject *self_object)
  * Creates a newly allocated ScmCalc
  *
  * Returns: #ScmCalc*
- *
- * # Sub heading #
- *
- * more documentation:
- * - list item 1
- * - list item 2
- *
- * Even more docs.
  */
 ScmCalc*
 scmcalc_new ()
@@ -100,10 +103,10 @@ scmcalc_new ()
 
 /**
  * scmcalc_free:
+ * @scmcalc: the #ScmCalc to delete, can be NULL
  *
  * Deletes a #ScmCalc
  *
- * @scmcalc: the #ScmCalc to delete, can be NULL
  */
 void 
 scmcalc_free (ScmCalc* scmcalc)
@@ -115,7 +118,13 @@ scmcalc_free (ScmCalc* scmcalc)
 }
 
 /**
- * Crée la fenetre
+ * scmcalc_create_window:
+ * @self : le #ScmCalc qui doit recevoir la nouvelle fenêtre
+ *
+ * Crée une nouvelle fenêtre et met à jour les attributs du #ScmCalc 
+ * en conséquence.
+ *
+ * Returns: Une GtkWidget (window) fraîchement allouée :D
  */
 static GtkWidget*
 scmcalc_create_window (ScmCalc *self)
@@ -195,11 +204,11 @@ scmcalc_create_window (ScmCalc *self)
 
 /**
  * scmcalc_disp:
+ * @self : #ScmCalc to set
+ * @action : the string to display (without the parenthesis)
  *
  * Displays the action on the #GtkEntry with parenthesis around
  *
- * @self : #ScmCalc to set
- * @action : the string to display (without the parenthesis)
  */
 void 
 scmcalc_disp (ScmCalc *self, const gchar* action)
@@ -234,11 +243,11 @@ wrapper_handler_proc (gpointer data, SCM key, SCM param)
 
 /**
  * scmcalc_execute:
+ * @self : #ScmCalc to infer with
+ * @ation : the action to be executed
  *
  * Execute the action passed
  *
- * @self : #ScmCalc to infer
- * @ation : the action to be executed
  */
 void 
 scmcalc_execute (ScmCalc* self, const gchar *action) 
@@ -262,20 +271,20 @@ scmcalc_execute (ScmCalc* self, const gchar *action)
 		
 		scm_c_define ("private-preced-var", rep);
 	} else if (scm_list_p (result) == SCM_BOOL_T) {
-		SCM elem;
-		elem = scm_c_eval_string ("(map );
+		/*SCM elem;
+		elem = scm_c_eval_string ("(map )");*/
 	}
 }
 
 /**
  * scmcalc_execute_save:
+ * @self : #ScmCalc to infer
+ * @ation : the action to be executed
  *
  * The same as scmcalc_execute() except that it
  * saves the command in the command-history with 
  * scmcalc_add_historique() 
  *
- * @self : #ScmCalc to infer
- * @ation : the action to be executed
  */
 void 
 scmcalc_execute_save (ScmCalc* self, const gchar *action)
@@ -286,11 +295,11 @@ scmcalc_execute_save (ScmCalc* self, const gchar *action)
 
 /**
  * scmcalc_add_historique:
+ * @self : #ScmCalc to infer
+ * @ation : the action to be saved
  *
  * Saves the command in the command history 
  *
- * @self : #ScmCalc to infer
- * @ation : the action to be saved
  */
 void 
 scmcalc_add_historique (ScmCalc* self, const gchar *text)
