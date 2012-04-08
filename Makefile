@@ -10,7 +10,8 @@ PAQUETS = 	guile-1.8 \
 			glib-2.0 \
 			gtk+-3.0 \
 			gmodule-export-2.0 \
-			gobject-2.0
+			gobject-2.0 
+#			libgda-5.0
 			
 PKGS = `pkg-config --cflags --libs $(PAQUETS)`
 

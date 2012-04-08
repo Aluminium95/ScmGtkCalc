@@ -27,8 +27,8 @@ static void scmcalc_finalize (GObject *self);
 static void scmcalc_class_init (ScmCalcClass* klass);
 static void scmcalc_init (ScmCalc* self);
 static GtkWidget* scmcalc_create_window (ScmCalc *self);
-SCM wrapper_body_proc (gpointer data);
-SCM wrapper_handler_proc (gpointer data, SCM key, SCM param);
+static SCM wrapper_body_proc (gpointer data);
+static SCM wrapper_handler_proc (gpointer data, SCM key, SCM param);
 
 /**
  * Création de la classe 
@@ -217,14 +217,14 @@ scmcalc_disp (ScmCalc *self, const gchar* action)
 }
 
 
-SCM
+static SCM
 wrapper_body_proc (gpointer data)
 {
 	gchar* cmd = (gchar*) data;
 	return scm_c_eval_string (cmd);
 }
 
-SCM
+static SCM
 wrapper_handler_proc (gpointer data, SCM key, SCM param)
 {
 	ScmCalc* self = SCM_CALC (data);
