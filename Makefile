@@ -2,16 +2,18 @@ PROGRAM = gtkcalc
 
 DOC_MODULE=gtkcalc
 
-# Sources Files
+ROOT = ""
+
+# Sources Files ... ugly ?
 SRC = 	"src"/*.c 
 
-# Paquets
+# Paquets à linker
 PAQUETS = 	guile-1.8 \
 			glib-2.0 \
 			gtk+-3.0 \
 			gmodule-export-2.0 \
 			gobject-2.0 
-#			libgda-5.0
+#			libgda-5.0 NOT NEEDED YET ... AND MAYBE NEVER !!!
 			
 PKGS = `pkg-config --cflags --libs $(PAQUETS)`
 
@@ -37,15 +39,13 @@ clean:
 # Cible basique
 .PHONY : all
 all:
-	gtkdoc-scan --module=$(DOC_MODULE) --source-dir=./src --output-dir=Doc
-	# gtkdoc-scangobj --module=$(DOC_MODULE) 
-	cd Doc && gtkdoc-mkdb --module=$(DOC_MODULE) --output-format=xml && cd html && gtkdoc-mkhtml $(DOC_MODULE) ../$(DOC_MODULE)-docs.xml && cd .. &&  gtkdoc-fixxref --module=$(DOC_MODULE) --module-dir=html
-	
 	$(CC) $(OPTS) $(SRC) -o Build/$(PROGRAM) $(PKGS) $(CONFIG)
 	
-.PHONY : static
-static:
-	$(CC) -static --enable-static-link --disable-shared $(OPTS) $(SRC) -o Build/$(PROGRAM) $(PKGS) $(CONFIG)
+.PHONY : doc
+doc:
+	gtkdoc-scan --module=$(DOC_MODULE) --source-dir=./src --output-dir=Doc
+	cd Doc && gtkdoc-mkdb --module=$(DOC_MODULE) --output-format=xml && cd html && gtkdoc-mkhtml $(DOC_MODULE) ../$(DOC_MODULE)-docs.xml && cd .. &&  gtkdoc-fixxref --module=$(DOC_MODULE) --module-dir=html
+	
 
 # Installe sur le système !
 .PHONY : install
@@ -55,29 +55,36 @@ install : clean
 	$(CC) $(OPTS) $(SRC) -o Build/$(PROGRAM) $(PKGS) $(CONFIG_INSTALL)
 	
 	# Création du répertoire du programme
-	@mkdir -p "/usr/share/$(PROGRAM)"
+	@mkdir -p "$(ROOT)/usr/share/$(PROGRAM)"
 	
 	# Copie des données du programme
-	@cp -R ./Data/ "/usr/share/$(PROGRAM)/Data"
+	@cp -R ./Data/ "$(ROOT)/usr/share/$(PROGRAM)/Data"
 	
 	# Modification des permissions des fichiers 
-	@chmod -R u+rw "/usr/share/$(PROGRAM)"
+	@chmod -R u+rw "$(ROOT)/usr/share/$(PROGRAM)"
 	
 	# Installation du .desktop
-	@cp `pwd`/DesktopIntegration/$(PROGRAM).desktop "/usr/share/applications/$(PROGRAM).desktop"
-	@chmod u+x "/usr/share/applications/$(PROGRAM).desktop"
+	@mkdir -p "$(ROOT)/usr/share/applications"
+	@cp `pwd`/DesktopIntegration/$(PROGRAM).desktop "$(ROOT)/usr/share/applications/$(PROGRAM).desktop"
+	@chmod u+x "$(ROOT)/usr/share/applications/$(PROGRAM).desktop"
 	
 	# Installation des icones
-	@cp `pwd`/DesktopIntegration/48.png "/usr/share/icons/hicolor/48x48/apps/$(PROGRAM).png"
-	@cp `pwd`/DesktopIntegration/64.png "/usr/share/icons/hicolor/64x64/apps/$(PROGRAM).png"
-	@cp `pwd`/DesktopIntegration/128.png "/usr/share/icons/hicolor/128x128/apps/$(PROGRAM).png"
-	@cp `pwd`/DesktopIntegration/Icon.svg "/usr/share/icons/hicolor/scalable/apps/$(PROGRAM).svg"
+	@mkdir -p "$(ROOT)/usr/share/icons/hicolor/48x48/apps"
+	@mkdir -p "$(ROOT)/usr/share/icons/hicolor/64x64/apps"
+	@mkdir -p "$(ROOT)/usr/share/icons/hicolor/128x128/apps"
+	@mkdir -p "$(ROOT)/usr/share/icons/hicolor/scalable/apps"
+	@cp `pwd`/DesktopIntegration/48.png "$(ROOT)/usr/share/icons/hicolor/48x48/apps/$(PROGRAM).png"
+	@cp `pwd`/DesktopIntegration/64.png "$(ROOT)/usr/share/icons/hicolor/64x64/apps/$(PROGRAM).png"
+	@cp `pwd`/DesktopIntegration/128.png "$(ROOT)/usr/share/icons/hicolor/128x128/apps/$(PROGRAM).png"
+	@cp `pwd`/DesktopIntegration/Icon.svg "$(ROOT)/usr/share/icons/hicolor/scalable/apps/$(PROGRAM).svg"
 	
 	# Installation de la man page
-	@cp `pwd`/DesktopIntegration/$(PROGRAM).6.gz "/usr/share/man/man6/$(PROGRAM).6.gz"
+	@mkdir -p "$(ROOT)/usr/share/man/man6"
+	@cp `pwd`/DesktopIntegration/$(PROGRAM).6.gz "$(ROOT)/usr/share/man/man6/$(PROGRAM).6.gz"
 	
 	# Déplacement du programme dans /usr/bin
-	@mv Build/$(PROGRAM) "/usr/bin/$(PROGRAM)"
+	@mkdir -p "$(ROOT)/usr/bin"
+	@mv Build/$(PROGRAM) "$(ROOT)/usr/bin/$(PROGRAM)"
 	
 # Désinstalle
 .PHONY : uninstall
