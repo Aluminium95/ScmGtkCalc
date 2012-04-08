@@ -20,22 +20,38 @@
 
 
 /**
- * identifier:
+ * destroy:
  *
- * documentation ...
- *
- * # Sub heading #
- *
- * more documentation:
- * - list item 1
- * - list item 2
- *
- * Even more docs.
+ * Callback quand la fenêtre est fermée
  */
 void
 destroy (GtkWidget *widget, gpointer data)
 {
 	gtk_main_quit ();
+}
+
+/**
+ * Callback about dialog 
+ */
+void 
+cb_about_dialog (GtkWidget *widget, gpointer data)
+{
+	gchar* authors[2] = {"LOPEZ Aliaume <lopezaliaume@gmail.com>", NULL};
+	
+	gchar* documenters[2] = {"No ... ", NULL};
+	gchar* traducteurs = "No ...";
+	
+	gtk_show_about_dialog (GTK_WINDOW (SCM_CALC(data)->window),
+                       "program-name", "GtkCalc",
+                       "logo", gdk_pixbuf_new_from_file (DATA "/icon.png", NULL),
+                       "title", _("About GtkCalc"),
+                       "comments", "Une méga calculatrice programmable en Scheme !",
+                       "license", "\n ScmCalcGtk is free software: you can redistribute it and/or modify it \n under the terms of the GNU General Public License as published by the \n Free Software Foundation, either version 3 of the License, or \n (at your option) any later version. \n \n ScmCalcGtk is distributed in the hope that it will be useful, but \n WITHOUT ANY WARRANTY; without even the implied warranty of \n MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. \n See the GNU General Public License for more details. \n \n You should have received a copy of the GNU General Public License along \n with this program.  If not, see <http://www.gnu.org/licenses/>. \n",
+                       "copyright", "Copyright (C) 2012 Babakask <lopezaliaume@gmail.com>",
+                       "authors", authors,
+                       "documenters", documenters,
+                       "translator-credits", traducteurs,
+                       NULL);
 }
 
 /**
