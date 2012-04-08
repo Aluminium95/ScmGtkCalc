@@ -58,15 +58,6 @@ scmcalc_init (ScmCalc *self)
 	
 	scm_c_define_gsubr ("carre", 1, 0, 0, scm_carre);
 	
-	scm_c_eval_string ("(define private-preced-list '())");
-	
-	gchar * cmd = g_strconcat ("(define (", _("precedent"), ") (car private-preced-list))", NULL);
-	gchar * cmd2 = g_strconcat ("(define (precedent-x x) (let loop ((i 1) (prec private-preced-list)) (if (= i x) (car prec) (loop (+ i 1) (cdr prec)))))");
-
-	
-	scm_c_eval_string (cmd);
-	scm_c_eval_string (cmd2);
-	
 	/*
 	 * Chargement :
 	 *		- dictionnaire
@@ -74,6 +65,7 @@ scmcalc_init (ScmCalc *self)
 	 * 		- conversions 
 	 *		- operations 
 	 */
+	scm_c_primitive_load (DATA "/Scheme/utils.scm");
 	scm_c_primitive_load (DATA "/Scheme/dico.scm");
 	scm_c_primitive_load (DATA "/Scheme/suites.scm");
 	scm_c_primitive_load (DATA "/Scheme/convertions.scm");
@@ -82,9 +74,6 @@ scmcalc_init (ScmCalc *self)
 	self->window = scmcalc_create_window (self);
 	
 	gtk_widget_show (self->window);
-	
-	g_free (cmd);
-	g_free (cmd2);
 	
 	g_return_if_fail (self != NULL);
 }
@@ -282,11 +271,12 @@ scmcalc_execute (ScmCalc* self, const gchar *action)
 		rep = result;
 
 		SCM t = scm_number_to_string (rep, scm_from_int (10));
-	
+		
 		gtk_label_set_label (self->sortie, scm_to_locale_string (t));
 		
-		SCM new_list = scm_cons (rep, scm_c_eval_string ("private-preced-list"));
-		scm_c_define ("private-preced-list", new_list);
+		SCM append_func_symbol = scm_c_lookup("precedent-add");
+ 		SCM append_func = scm_variable_ref (append_func_symbol);
+		scm_call_1 (append_func, rep);
 	} else if (scm_list_p (result) == SCM_BOOL_T) {
 		/*SCM elem;
 		elem = scm_c_eval_string ("(map )");*/
