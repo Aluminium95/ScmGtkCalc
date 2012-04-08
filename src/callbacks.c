@@ -110,10 +110,13 @@ void
 cb_executer (GtkButton* b, gpointer user_data) 
 {
 	ScmCalc* self = SCM_CALC (user_data);
+	const gchar* text = gtk_entry_get_text (self->code);
 	
-	scmcalc_execute_save (self, gtk_entry_get_text (self->code));
+	if (*text != 0) { // Quand le premier carac est null
+		scmcalc_execute_save (self, text);
 	
-	gtk_entry_set_text (self->code, "");
+		gtk_entry_set_text (self->code, "");
+	}
 }
 
 void cb_precedent (GtkButton* b, gpointer user_data)
