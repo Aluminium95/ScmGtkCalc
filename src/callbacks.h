@@ -17,9 +17,9 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-#ifndef H_CALCULETTE_CB
+#ifndef _H_CALCULETTE_CB
 
-#define H_CALCULETTE_CB
+#define _H_CALCULETTE_CB
 
 #include <gtk/gtk.h>
 #include <libguile.h>

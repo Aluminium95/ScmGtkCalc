@@ -261,7 +261,10 @@ scmcalc_execute (ScmCalc* self, const gchar *action)
 		gtk_label_set_label (self->sortie, scm_to_locale_string (t));
 		
 		scm_c_define ("private-preced-var", rep);
-	}	
+	} else if (scm_list_p (result) == SCM_BOOL_T) {
+		SCM elem;
+		elem = scm_c_eval_string ("(map );
+	}
 }
 
 /**

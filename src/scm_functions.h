@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef H_CALCULETTE_SCM
+#ifndef _H_CALCULETTE_SCM
 
-#define H_CALCULETTE_SCM
+#define _H_CALCULETTE_SCM
 
 #include <libguile.h>
 
