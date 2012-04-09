@@ -263,7 +263,7 @@ static SCM
 wrapper_handler_proc (gpointer data, SCM key, SCM param)
 {
 	ScmCalc* self = SCM_CALC (data);
-	return scm_from_locale_string ("Erreur ... ");
+	return param;
 }
 
 /**

@@ -25,7 +25,7 @@
 		((equal? dict '())
 			'(error "Not Found"))
 		((equal? key (car (car dict)))
-			(car (cdr (car dict))))
+			(cdr (car dict)))
 		(else
 			(dict-get (cdr dict) key))))
 
@@ -34,7 +34,7 @@
 ; Complexité : O(1)
 ; !!! -> pas de vérification des doublons
 (define (dict-add dict key val)
-	(cons (list key val) dict))
+	(cons `(,key . ,val) dict))
 
 ; Macro pour la modification directe
 (define-macro (dict-add! dico key val)
@@ -67,10 +67,16 @@
 		((equal? after '())
 			(dict-add before key val))
 		((equal? key (car (car after)))
-			(append (cons (list key val) before) (cdr after)))
+			(append (cons (cons key val) before) (cdr after)))
 		(else 
 			(dict-set-acc (cons (car after) before) (cdr after) key val))))
 
 (define-macro (dict-set! dict key val)
 	`(set! ,dict (dict-set-acc '() ,dict ,key ,val)))
+	
+(define (dict-get-keys dict)
+	(map (lambda (x) (car x)) dict))
+
+(define (dict-get-vals dict)
+	(map (lambda (x) (cdr x)) dict))
 
