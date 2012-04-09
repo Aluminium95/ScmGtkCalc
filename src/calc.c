@@ -253,8 +253,7 @@ static SCM
 wrapper_handler_proc (gpointer data, SCM key, SCM param)
 {
 	ScmCalc* self = SCM_CALC (data);
-	gtk_label_set_label (self->sortie, "Erreur Syntaxe !");
-	return SCM_BOOL_F;
+	return scm_from_locale_string ("Erreur ... ");
 }
 
 /**
@@ -278,19 +277,23 @@ scmcalc_execute (ScmCalc* self, const gchar *action)
                     wrapper_handler_proc, (gpointer) self,
                     NULL, NULL);
 	
+	/**
+	 * Si c'est un nombre on le sauvegarde 
+	 */
 	if (scm_is_number (result)) {
-		rep = result;
 
-		SCM t = scm_number_to_string (rep, scm_from_int (10));
-		
-		gtk_label_set_label (self->sortie, scm_to_locale_string (t));
+		SCM t = scm_number_to_string (result, scm_from_int (10));
 		
 		SCM append_func_symbol = scm_c_lookup("precedent-add");
  		SCM append_func = scm_variable_ref (append_func_symbol);
-		scm_call_1 (append_func, rep);
-	} else if (scm_list_p (result) == SCM_BOOL_T) {
-		/*SCM elem;
-		elem = scm_c_eval_string ("(map )");*/
+		scm_call_1 (append_func, result);
+	}
+	
+	{
+		SCM format_symbol = scm_c_lookup("format");
+	 	SCM format = scm_variable_ref (format_symbol);
+		SCM string = scm_call_3 (format, SCM_BOOL_F, scm_from_locale_string ("~a"), result);
+		gtk_label_set_label (self->sortie, scm_to_locale_string (string));
 	}
 }
 
