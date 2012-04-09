@@ -351,6 +351,9 @@ scmcalc_add_historique (ScmCalc* self, const gchar *text)
 	gtk_text_buffer_get_iter_at_line (self->historique, &iter, lines);
 	gtk_text_buffer_insert (self->historique, &iter, gtk_text_buffer_get_text (code_buf, &code_start, &code_end, FALSE), -1);
 	gtk_text_buffer_insert (self->historique, &iter, "\n", -1);
+	
+	gtk_text_buffer_get_end_iter (self->historique, &iter);
+	gtk_text_buffer_place_cursor (self->historique, &iter);
 }
 
 /**
