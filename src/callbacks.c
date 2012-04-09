@@ -64,11 +64,13 @@ cb_add_space (GtkButton *b, gpointer user)
 {
 	const ScmCalc* self = SCM_CALC (user);
 	
-	gint pos = gtk_editable_get_position (GTK_EDITABLE (self->code));
-
-	gtk_editable_insert_text (GTK_EDITABLE (self->code), " ", -1, &pos);
-
-	gtk_editable_set_position (GTK_EDITABLE (self->code), pos);
+	GtkTextBuffer* buf = gtk_text_view_get_buffer (self->code);
+	GtkTextIter insert;
+	
+	GtkTextMark* mark_insert = gtk_text_buffer_get_insert (buf);
+	gtk_text_buffer_get_iter_at_mark (buf, &insert, mark_insert);
+	
+	gtk_text_buffer_insert (buf, &insert, " ", -1);
 }
 
 /**
@@ -78,11 +80,16 @@ void
 cb_nombre (GtkButton *b, gpointer user_data) 
 {
 	const ScmCalc* self = SCM_CALC (user_data);
+	GtkTextBuffer* buf = gtk_text_view_get_buffer (self->code);
+	GtkTextIter insert;
 	
-	gint pos = gtk_editable_get_position (GTK_EDITABLE (self->code));
+	GtkTextMark* mark_insert = gtk_text_buffer_get_insert (buf);
+	gtk_text_buffer_get_iter_at_mark (buf, &insert, mark_insert);
+
 	gchar* cmd = g_strdup_printf ("%s", gtk_button_get_label (b));
-	gtk_editable_insert_text (GTK_EDITABLE (self->code), cmd, -1, &pos);
-	gtk_editable_set_position (GTK_EDITABLE (self->code), pos);
+	
+	gtk_text_buffer_insert (buf, &insert, cmd, -1);
+	
 	g_free (cmd);
 }
 
