@@ -23,6 +23,7 @@
     <property name="hexpand">True</property>
     <property name="vexpand">True</property>
     <property name="title" translatable="yes">GtkCalc</property>
+    <property name="resizable">False</property>
     <property name="default_width">600</property>
     <property name="default_height">400</property>
     <signal name="destroy" handler="destroy" swapped="no"/>
@@ -244,35 +245,18 @@
             <property name="border_width">1</property>
             <property name="orientation">vertical</property>
             <child>
-              <object class="GtkBox" id="box1">
+              <object class="GtkScrolledWindow" id="scrolledwindow1">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can_focus">True</property>
                 <child>
                   <object class="GtkTextView" id="historique">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="vadjustment">ajustement_historique</property>
+                    <property name="can_focus">True</property>
+                    <property name="vscroll_policy">natural</property>
                     <property name="editable">False</property>
                     <property name="justification">right</property>
+                    <property name="cursor_visible">False</property>
                   </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkScrollbar" id="scrollbar1">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="orientation">vertical</property>
-                    <property name="adjustment">ajustement_historique</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
                 </child>
               </object>
               <packing>
