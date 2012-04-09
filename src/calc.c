@@ -29,6 +29,7 @@ static void scmcalc_init (ScmCalc* self);
 static GtkWidget* scmcalc_create_window (ScmCalc *self);
 static SCM wrapper_body_proc (gpointer data);
 static SCM wrapper_handler_proc (gpointer data, SCM key, SCM param);
+static void scmcalc_set_code_style (GtkTextView* code);
 
 /**
  * scmcalc_class_init:
@@ -122,6 +123,14 @@ scmcalc_free (ScmCalc* scmcalc)
 	}
 }
 
+static void
+scmcalc_set_code_style (GtkTextView* code)
+{
+	PangoFontDescription* font = pango_font_description_from_string ("Monospace 24");
+	gtk_widget_modify_font (GTK_WIDGET (code), font);
+	pango_font_description_free (font);
+}
+
 /**
  * scmcalc_create_window:
  * @self : le #ScmCalc qui doit recevoir la nouvelle fenêtre
@@ -175,6 +184,7 @@ scmcalc_create_window (ScmCalc *self)
 				"code",
 				UI_FILE);
 		}
+	scmcalc_set_code_style (self->code);
 
 	h = GTK_TEXT_VIEW (gtk_builder_get_object (builder, "historique"));
         if (!h)
