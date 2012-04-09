@@ -117,6 +117,28 @@ cb_point (GtkButton *b, gpointer user_data)
 }
 
 /**
+ * Quand un truc est entré :D S'il contient un \n,
+ * on exécute ... mais c'est putain de moche les gars !
+ */
+gboolean
+cb_code_change  (GtkWidget * widget, GdkEventKey* pKey,gpointer user_data)
+{
+	ScmCalc* self = SCM_CALC (user_data);
+	
+	if (pKey->type == GDK_KEY_PRESS){
+		switch (pKey->keyval)
+    	{
+    		case 65293:
+    			cb_executer (NULL, self);
+    			return TRUE;
+    		break;
+    	}
+    }
+    
+    return FALSE;
+}
+
+/**
  * Execute la commande (n'importe quel objet peut le demander)
  */
 void
@@ -140,10 +162,9 @@ cb_executer (GObject* b, gpointer user_data)
 void cb_precedent (GtkButton* b, gpointer user_data)
 {
 	ScmCalc* self = SCM_CALC (user_data);
-	scmcalc_disp (self,_("precedent"));
+	scmcalc_disp_string (self, "(precedent) ");
 	
-	gint pos = gtk_editable_get_position (GTK_EDITABLE (self->code));
-	gtk_editable_set_position (GTK_EDITABLE (self->code), pos + 1);
+	
 }
 
 void cb_multiplier (GtkButton* b, gpointer user_data)

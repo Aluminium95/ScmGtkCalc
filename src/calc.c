@@ -221,11 +221,22 @@ scmcalc_disp (ScmCalc *self, const gchar* action)
 	
 	gchar* cmd = g_strdup_printf("(%s)", action);
 	
-	gint pos = gtk_editable_get_position (GTK_EDITABLE (self->code));
-
-	gtk_editable_insert_text (GTK_EDITABLE (self->code), cmd, -1, &pos);
-
-	gtk_editable_set_position (GTK_EDITABLE (self->code), pos - 1);
+	GtkTextBuffer* buf = gtk_text_view_get_buffer (self->code);
+	GtkTextIter insert;
+	
+	GtkTextMark* mark_insert = gtk_text_buffer_get_insert (buf);
+	gtk_text_buffer_get_iter_at_mark (buf, &insert, mark_insert);
+	
+	gtk_text_buffer_insert (buf, &insert, cmd, -1);
+	
+	mark_insert = gtk_text_buffer_get_insert (buf);
+	gtk_text_buffer_get_iter_at_mark (buf, &insert, mark_insert);
+	
+	gint cp = gtk_text_iter_get_offset (&insert);
+	
+	gtk_text_buffer_get_iter_at_offset (buf, &insert, cp - 1);
+	
+	gtk_text_buffer_place_cursor (buf, &insert);
 
 	g_free (cmd);
 }

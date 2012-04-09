@@ -26,6 +26,7 @@
 #include <glib/gi18n.h>
 #include <libguile.h>
 #include "scm_functions.h"
+#include "callbacks.h"
 
 #define TYPE_SCM_CALC 				(scmcalc_get_type ())
 #define SCM_CALC(obj) 				(G_TYPE_CHECK_INSTANCE_CAST ((obj), TYPE_SCM_CALC, ScmCalc))

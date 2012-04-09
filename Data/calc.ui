@@ -292,7 +292,7 @@
                 <property name="has_default">True</property>
                 <property name="receives_default">True</property>
                 <property name="justification">right</property>
-                <signal name="insert-at-cursor" handler="cb_code_change" swapped="no"/>
+                <signal name="key-press-event" handler="cb_code_change" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>

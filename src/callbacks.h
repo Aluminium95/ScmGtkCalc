@@ -48,6 +48,7 @@ void cb_executer (GObject* b, gpointer user_data);
 void cb_suppr (GtkButton* b, gpointer user_data);
 void cb_to_inexact (GtkButton* b, gpointer user_data);
 void cb_to_exact (GtkButton* b, gpointer user_data);
+gboolean cb_code_change (GtkWidget * widget, GdkEventKey* pKey,gpointer user_data);
 
 /**
  * Opérations simples (-+/*)
