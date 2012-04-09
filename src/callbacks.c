@@ -233,7 +233,5 @@ void cb_atan (GtkButton* b, gpointer user_data)
 void cb_pi (GtkButton* b, gpointer user_data)
 {
 	ScmCalc* self = SCM_CALC (user_data);
-	scmcalc_disp (self, "pi");
-	gint pos = gtk_editable_get_position (GTK_EDITABLE (self->code));
-	gtk_editable_set_position (GTK_EDITABLE (self->code), pos + 1);
+	scmcalc_disp_string (self, "(pi) ");
 }
