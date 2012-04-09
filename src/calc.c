@@ -27,6 +27,7 @@ static void scmcalc_finalize (GObject *self);
 static void scmcalc_class_init (ScmCalcClass* klass);
 static void scmcalc_init (ScmCalc* self);
 static GtkWidget* scmcalc_create_window (ScmCalc *self);
+static void scmcalc_create_layout (ScmCalc *self);
 static SCM wrapper_body_proc (gpointer data);
 static SCM wrapper_handler_proc (gpointer data, SCM key, SCM param);
 static void scmcalc_set_code_style (GtkTextView* code);
@@ -73,6 +74,8 @@ scmcalc_init (ScmCalc *self)
 	scm_c_primitive_load (DATA "/Scheme/operations.scm");
 	
 	self->window = scmcalc_create_window (self);
+	
+	scmcalc_create_layout (self);
 	
 	gtk_widget_show (self->window);
 	
@@ -148,7 +151,10 @@ scmcalc_create_window (ScmCalc *self)
 	GtkTextView* h;
 	GError* error = NULL;
 	const gchar *widget_missing = _("Widget \"%s\" is missing in file %s.");
-
+	
+	#define UI_FILE DATA "/calc_test.ui"
+	#define UI_INTERN DATA "/layout.ui"
+	
 	/* Load UI from file */
 	builder = gtk_builder_new ();
 	if (!gtk_builder_add_from_file (builder, UI_FILE, &error))
@@ -168,41 +174,15 @@ scmcalc_create_window (ScmCalc *self)
 				"window",
 				UI_FILE);
 		}
-
-	self->sortie = GTK_LABEL (gtk_builder_get_object (builder, "sortie"));
-        if (!self->sortie)
+	
+	self->global_layout = GTK_BOX (gtk_builder_get_object (builder, "global_layout"));
+        if (!self->global_layout)
         {
-                g_critical (widget_missing,
-				"sortie",
+                g_critical ( widget_missing,
+				"window",
 				UI_FILE);
 		}
-
-	self->code = GTK_TEXT_VIEW (gtk_builder_get_object (builder, "code"));
-        if (!self->code)
-        {
-                g_critical (widget_missing,
-				"code",
-				UI_FILE);
-		}
-	scmcalc_set_code_style (self->code);
-
-	h = GTK_TEXT_VIEW (gtk_builder_get_object (builder, "historique"));
-        if (!h)
-        {
-                g_critical (widget_missing,
-				"historique",
-				UI_FILE);
-		}
-
-	self->prec_cmd = GTK_LABEL (gtk_builder_get_object (builder, "prec_cmd"));
-        if (!self->prec_cmd)
-        {
-                g_critical (widget_missing,
-				"prec_cmd",
-				UI_FILE);
-		}
-
-	self->historique = gtk_text_view_get_buffer (h);
+	g_printf ("Finish load window \n");
 
 	g_object_unref (builder);
 	
@@ -214,6 +194,82 @@ scmcalc_create_window (ScmCalc *self)
 	}
 	
 	return window;
+}
+
+/**
+ * scmcalc_create_layout:
+ *
+ * Crée le layout de la fenetre
+ */
+static void
+scmcalc_create_layout (ScmCalc *self)
+{
+	GtkBuilder *builder;
+	GtkTextView* h;
+	GError* error = NULL;
+	GtkWidget* layout = NULL;
+	const gchar *widget_missing = _("Widget \"%s\" is missing in file %s.");
+	
+	#define UI_FILE DATA "/calc_test.ui"
+	#define UI_INTERN DATA "/layout.ui"
+	
+	/* Load UI from file */
+	builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_file (builder, UI_INTERN, &error))
+	{
+		g_critical (_("Couldn't load builder file: %s"), error->message);
+		g_error_free (error);
+	}
+
+	/* Auto-connect signal handlers */
+	gtk_builder_connect_signals (builder, self);
+
+	self->sortie = GTK_LABEL (gtk_builder_get_object (builder, "sortie"));
+        if (!self->sortie)
+        {
+                g_critical (widget_missing,
+				"sortie",
+				UI_INTERN);
+		}
+
+	self->code = GTK_TEXT_VIEW (gtk_builder_get_object (builder, "code"));
+        if (!self->code)
+        {
+                g_critical (widget_missing,
+				"code",
+				UI_INTERN);
+		}
+	scmcalc_set_code_style (self->code);
+
+	h = GTK_TEXT_VIEW (gtk_builder_get_object (builder, "historique"));
+        if (!h)
+        {
+                g_critical (widget_missing,
+				"historique",
+				UI_INTERN);
+		}
+
+	self->prec_cmd = GTK_LABEL (gtk_builder_get_object (builder, "prec_cmd"));
+        if (!self->prec_cmd)
+        {
+                g_critical (widget_missing,
+				"prec_cmd",
+				UI_INTERN);
+		}
+
+	self->historique = gtk_text_view_get_buffer (h);
+	
+	layout = GTK_WIDGET (gtk_builder_get_object (builder, "calculette"));
+        if (!layout)
+        {
+                g_critical (widget_missing,
+				"calculette",
+				UI_INTERN);
+		}
+	
+	self->current_layout = layout;
+	gtk_box_pack_end (self->global_layout, GTK_WIDGET (layout), TRUE, TRUE, 0);
+	g_object_unref (builder);
 }
 
 

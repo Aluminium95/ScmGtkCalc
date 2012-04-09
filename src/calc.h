@@ -51,6 +51,8 @@ struct _ScmCalc {
 	/* public */
 	GObject parent;
 	GtkWidget *window;
+	GtkBox *global_layout; /* The global container */
+	GtkWidget *current_layout; /* The current display thing :D */
 	GtkTextView* code;
 	GtkLabel* prec_cmd;
 	GtkLabel* sortie;
