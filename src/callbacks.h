@@ -44,7 +44,7 @@ void destroy (GtkWidget *widget, gpointer data);
 void cb_add_space (GtkButton *b, gpointer user);
 void cb_nombre (GtkButton *b, gpointer user_data);
 void cb_point (GtkButton *b, gpointer user_data);
-void cb_executer (GtkButton* b, gpointer user_data);
+void cb_executer (GObject* b, gpointer user_data);
 void cb_suppr (GtkButton* b, gpointer user_data);
 void cb_to_inexact (GtkButton* b, gpointer user_data);
 void cb_to_exact (GtkButton* b, gpointer user_data);

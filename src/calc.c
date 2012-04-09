@@ -168,7 +168,7 @@ scmcalc_create_window (ScmCalc *self)
 				UI_FILE);
 		}
 
-	self->code = GTK_ENTRY (gtk_builder_get_object (builder, "code"));
+	self->code = GTK_TEXT_VIEW (gtk_builder_get_object (builder, "code"));
         if (!self->code)
         {
                 g_critical (widget_missing,
@@ -312,19 +312,19 @@ void
 scmcalc_add_historique (ScmCalc* self, const gchar *text)
 {
 	gint lines = gtk_text_buffer_get_line_count (self->historique);
-
-	GtkTextIter iter, start, end;
+	GtkTextBuffer * code_buf = gtk_text_view_get_buffer (self->code);
+	GtkTextIter iter, start, end, code_start, code_end;
 	
 	if (lines >= 10) {
 		gtk_text_buffer_get_iter_at_line (self->historique, &start, 0);
 		gtk_text_buffer_get_iter_at_line (self->historique, &end, 1);
 		gtk_text_buffer_delete (self->historique, &start, &end);
 	}
+	
+	gtk_text_buffer_get_start_iter (code_buf, &code_start);
+	gtk_text_buffer_get_end_iter (code_buf, &code_end);
 
 	gtk_text_buffer_get_iter_at_line (self->historique, &iter, lines);
-	
-	gtk_text_buffer_insert (self->historique, &iter, gtk_entry_get_text(self->code), -1);
-	
+	gtk_text_buffer_insert (self->historique, &iter, gtk_text_buffer_get_text (code_buf, &code_start, &code_end, FALSE), -1);
 	gtk_text_buffer_insert (self->historique, &iter, "\n", -1);
-
 }

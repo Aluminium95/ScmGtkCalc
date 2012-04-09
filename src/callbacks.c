@@ -90,11 +90,11 @@ void
 cb_suppr (GtkButton *b, gpointer user_data) 
 {
 	const ScmCalc* self = SCM_CALC (user_data);
-	GtkEntryBuffer* buf = gtk_entry_get_buffer (self->code);
-	
-	gint pos = gtk_editable_get_position (GTK_EDITABLE (self->code));
-	gtk_entry_buffer_delete_text (buf, pos - 1, pos);
-	gtk_editable_set_position (GTK_EDITABLE (self->code), pos - 1);
+	GtkTextBuffer* buf = gtk_text_view_get_buffer (self->code);
+	GtkTextMark* mark_insert = gtk_text_buffer_get_insert (buf);
+	GtkTextIter pos;
+	gtk_text_buffer_get_iter_at_mark (buf, &pos, mark_insert);
+	gtk_text_buffer_backspace (buf, &pos, TRUE, TRUE);
 }
 
 void 
@@ -122,18 +122,23 @@ cb_point (GtkButton *b, gpointer user_data)
 }
 
 /**
- * Execute la commande
+ * Execute la commande (n'importe quel objet peut le demander)
  */
 void
-cb_executer (GtkButton* b, gpointer user_data) 
+cb_executer (GObject* b, gpointer user_data) 
 {
 	ScmCalc* self = SCM_CALC (user_data);
-	const gchar* text = gtk_entry_get_text (self->code);
+	GtkTextBuffer* buf = gtk_text_view_get_buffer (self->code);
+	GtkTextIter start, end;
 	
-	if (*text != 0) { // Quand le premier carac est null
+	gtk_text_buffer_get_start_iter (buf, &start);
+	gtk_text_buffer_get_end_iter (buf, &end);
+	
+	const gchar* text = gtk_text_buffer_get_text (buf, &start, &end, FALSE);
+	
+	if (*text != 0) { // Quand le premier carac n'est pas null
 		scmcalc_execute_save (self, text);
-	
-		gtk_entry_set_text (self->code, "");
+		gtk_text_buffer_set_text (buf, "", -1);
 	}
 }
 

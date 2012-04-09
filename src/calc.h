@@ -50,7 +50,7 @@ struct _ScmCalc {
 	/* public */
 	GObject parent;
 	GtkWidget *window;
-	GtkEntry* code;
+	GtkTextView* code;
 	GtkLabel* prec_cmd;
 	GtkLabel* sortie;
 	GtkTextBuffer* historique;
