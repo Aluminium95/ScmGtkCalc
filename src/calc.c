@@ -328,3 +328,23 @@ scmcalc_add_historique (ScmCalc* self, const gchar *text)
 	gtk_text_buffer_insert (self->historique, &iter, gtk_text_buffer_get_text (code_buf, &code_start, &code_end, FALSE), -1);
 	gtk_text_buffer_insert (self->historique, &iter, "\n", -1);
 }
+
+/**
+ * scmcalc_disp_string:
+ * @self : #ScmCalc to infer
+ * @ation : the string to be added
+ *
+ * Insert the string litteral into the command prompt
+ *
+ */
+void
+scmcalc_disp_string (ScmCalc* self, const gchar* action)
+{
+	GtkTextBuffer* buf = gtk_text_view_get_buffer (self->code);
+	GtkTextIter insert;
+	
+	GtkTextMark* mark_insert = gtk_text_buffer_get_insert (buf);
+	gtk_text_buffer_get_iter_at_mark (buf, &insert, mark_insert);
+	
+	gtk_text_buffer_insert (buf, &insert, action, -1);
+}

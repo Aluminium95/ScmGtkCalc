@@ -75,6 +75,7 @@ void scmcalc_free (ScmCalc* scmcalc);
 void scmcalc_run (ScmCalc* scmcalc);
 
 void scmcalc_disp (ScmCalc* self, const gchar* action);
+void scmcalc_disp_string (ScmCalc* self, const gchar* action);
 void scmcalc_execute (ScmCalc* self, const gchar *action);
 
 void scmcalc_add_historique (ScmCalc* self, const gchar* action);
