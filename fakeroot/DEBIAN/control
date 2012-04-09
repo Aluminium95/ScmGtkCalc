@@ -1,0 +1,8 @@
+Package: gtkcalc
+Version: 0.1
+Section: base
+Priority: optional
+Architecture: all
+Depends: guile, gtk, glib
+Maintainer: Lopez Aliaume <lopezaliaume@gmail.com>
+Description: Une méga calculatrice Scheme :D
