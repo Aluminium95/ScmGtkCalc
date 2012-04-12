@@ -27,10 +27,11 @@ static void scmcalc_finalize (GObject *self);
 static void scmcalc_class_init (ScmCalcClass* klass);
 static void scmcalc_init (ScmCalc* self);
 static GtkWidget* scmcalc_create_window (ScmCalc *self);
-static void scmcalc_create_layout (ScmCalc *self);
+static void scmcalc_create_layout (ScmCalc *self, const gchar* path);
 static SCM wrapper_body_proc (gpointer data);
 static SCM wrapper_handler_proc (gpointer data, SCM key, SCM param);
 static void scmcalc_set_code_style (GtkTextView* code);
+static void scmcalc_delete_layout (ScmCalc *self);
 
 /**
  * scmcalc_class_init:
@@ -75,7 +76,7 @@ scmcalc_init (ScmCalc *self)
 	
 	self->window = scmcalc_create_window (self);
 	
-	scmcalc_create_layout (self);
+	scmcalc_create_layout (self, DATA "/layout.ui");
 	
 	gtk_widget_show (self->window);
 	
@@ -153,7 +154,6 @@ scmcalc_create_window (ScmCalc *self)
 	const gchar *widget_missing = _("Widget \"%s\" is missing in file %s.");
 	
 	#define UI_FILE DATA "/calc_test.ui"
-	#define UI_INTERN DATA "/layout.ui"
 	
 	/* Load UI from file */
 	builder = gtk_builder_new ();
@@ -202,16 +202,13 @@ scmcalc_create_window (ScmCalc *self)
  * Crée le layout de la fenetre
  */
 static void
-scmcalc_create_layout (ScmCalc *self)
+scmcalc_create_layout (ScmCalc *self, const gchar* UI_INTERN)
 {
 	GtkBuilder *builder;
 	GtkTextView* h;
 	GError* error = NULL;
 	GtkWidget* layout = NULL;
 	const gchar *widget_missing = _("Widget \"%s\" is missing in file %s.");
-	
-	#define UI_FILE DATA "/calc_test.ui"
-	#define UI_INTERN DATA "/layout.ui"
 	
 	/* Load UI from file */
 	builder = gtk_builder_new ();
@@ -272,6 +269,30 @@ scmcalc_create_layout (ScmCalc *self)
 	g_object_unref (builder);
 }
 
+/** 
+ * scmcalc_delete_layout:
+ *
+ * Détruit les éléments Gtk Contenus dans 
+ * le layout actuel
+ */
+static void
+scmcalc_delete_layout (ScmCalc* self) 
+{
+	gtk_widget_destroy (self->current_layout);
+}
+/**
+ * scmcalc_load_new_ui:
+ * 
+ * Supprime l'ancien layout (current_layout) 
+ * et en charge un nouveau selon le fichier 
+ * passé en argument
+ */
+void
+scmcalc_load_new_ui (ScmCalc* self, const gchar* path)
+{
+	scmcalc_delete_layout (self);
+	scmcalc_create_layout (self, path);
+}
 
 /**
  * scmcalc_disp:

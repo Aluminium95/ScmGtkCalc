@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkAction" id="load_ui">
+    <property name="label" translatable="yes" context="Enregistrer les fonctions crées dans un fichier." comments="Enregistrer = save">Charger UI</property>
+    <property name="stock_id">gtk-page-setup</property>
+    <property name="is_important">True</property>
+  </object>
   <object class="GtkAction" id="ouvrir">
     <property name="label" translatable="yes">Ouvrir</property>
     <property name="tooltip" translatable="yes">Charge un fichier de fonctions</property>
     <property name="stock_id">gtk-open</property>
-    <property name="is_important">True</property>
-  </object>
-  <object class="GtkAction" id="save">
-    <property name="label" translatable="yes" context="Enregistrer les fonctions crées dans un fichier." comments="Enregistrer = save">Enregistrer</property>
-    <property name="stock_id">gtk-save</property>
     <property name="is_important">True</property>
   </object>
   <object class="GtkWindow" id="window">
@@ -216,6 +216,21 @@
                 <property name="label" translatable="yes">Ouvrir</property>
                 <property name="use_underline">True</property>
                 <signal name="clicked" handler="load_scm_file" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="BoutonUI">
+                <property name="related_action">load_ui</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="related_action">load_ui</property>
+                <property name="label" translatable="yes">Change UI</property>
+                <property name="use_underline">True</property>
+                <signal name="clicked" handler="cb_load_ui" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>

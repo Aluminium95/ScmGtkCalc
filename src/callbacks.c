@@ -31,6 +31,45 @@ destroy (GtkWidget *widget, gpointer data)
 }
 
 /**
+ * cb_load_ui:
+ *
+ * Active le champ de recherche d'une nouvelle UI
+ */
+void
+cb_load_ui (GtkButton *b, gpointer data)
+{
+	GtkFileFilter *filter;
+	GtkWidget *chooser;
+	gchar *chemin = NULL;
+	
+	chooser = gtk_file_chooser_dialog_new ("Ouvrir...",
+											GTK_WINDOW(SCM_CALC (data)->window),
+											GTK_FILE_CHOOSER_ACTION_OPEN,
+											GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+											GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+											NULL);
+	
+	gtk_window_set_modal(GTK_WINDOW(chooser), TRUE);
+		
+	filter = gtk_file_filter_new ();
+	gtk_file_filter_add_pattern (filter, "*.ui");
+	
+	gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (chooser), filter);
+	
+	if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_ACCEPT)
+	{
+		chemin = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
+		
+		scmcalc_load_new_ui (SCM_CALC (data), chemin);
+		
+		g_free (chemin);
+	}
+
+
+	gtk_widget_destroy (chooser);
+}
+
+/**
  * cb_about_dialog:
  * 
  * Callback qui crée la fenêtre About de la calculette

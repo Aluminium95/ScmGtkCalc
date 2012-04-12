@@ -85,4 +85,6 @@ void scmcalc_add_historique (ScmCalc* self, const gchar* action);
 
 void scmcalc_execute_save (ScmCalc* self, const gchar *action);
 
+void scmcalc_load_new_ui (ScmCalc* self, const gchar *path);
+
 #endif /* H_CALCULETTE */
