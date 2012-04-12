@@ -3,6 +3,6 @@ Version: 0.1
 Section: base
 Priority: optional
 Architecture: all
-Depends: guile, gtk, glib
+Depends: guile-1.8, libgtk-3-0, glib-2.0-0
 Maintainer: Lopez Aliaume <lopezaliaume@gmail.com>
 Description: Une méga calculatrice Scheme :D
