@@ -34,7 +34,7 @@
 ; Complexité : O(1)
 ; !!! -> pas de vérification des doublons
 (define (dict-add dict key val)
-	(cons `(,key . ,val) dict))
+	(cons (cons key val) dict))
 
 ; Macro pour la modification directe
 (define-macro (dict-add! dico key val)

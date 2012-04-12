@@ -17,6 +17,7 @@ PAQUETS = 	guile-1.8 \
 			
 PKGS = `pkg-config --cflags --libs $(PAQUETS)`
 
+
 # Configuration normale
 CONFIG = -DDATA=\"`pwd`/Data\" \
 		 -DUI_FILE=\"`pwd`/Data/calc.ui\"
@@ -45,7 +46,7 @@ all:
 doc:
 	gtkdoc-scan --module=$(DOC_MODULE) --source-dir=./src --output-dir=Doc
 	cd Doc && gtkdoc-mkdb --module=$(DOC_MODULE) --output-format=xml && cd html && gtkdoc-mkhtml $(DOC_MODULE) ../$(DOC_MODULE)-docs.xml && cd .. &&  gtkdoc-fixxref --module=$(DOC_MODULE) --module-dir=html
-	
+	CC=gcc  CFLAGS=`pkg-config --cflags guile-1.8 gtk+-3.0 gobject-2.0`  LDFLAGS=`pkg-config --libs guile-1.8 gtk+-3.0 gobject-2.0`  RUN=exec  cd Doc && gtkdoc-scangobj --module=$(DOC_MODULE)
 
 # Installe sur le système !
 .PHONY : install
