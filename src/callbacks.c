@@ -36,7 +36,7 @@ destroy (GtkWidget *widget, gpointer data)
  * Active le champ de recherche d'une nouvelle UI
  */
 void
-cb_load_ui (GtkButton *b, gpointer data)
+cb_load_ui (GtkAction *b, gpointer data)
 {
 	GtkFileFilter *filter;
 	GtkWidget *chooser;

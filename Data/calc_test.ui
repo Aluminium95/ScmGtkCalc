@@ -5,12 +5,18 @@
     <property name="label" translatable="yes" context="Enregistrer les fonctions crées dans un fichier." comments="Enregistrer = save">Charger UI</property>
     <property name="stock_id">gtk-page-setup</property>
     <property name="is_important">True</property>
+    <signal name="activate" handler="cb_load_ui" swapped="no"/>
   </object>
   <object class="GtkAction" id="ouvrir">
     <property name="label" translatable="yes">Ouvrir</property>
     <property name="tooltip" translatable="yes">Charge un fichier de fonctions</property>
     <property name="stock_id">gtk-open</property>
     <property name="is_important">True</property>
+    <signal name="activate" handler="load_scm_file" swapped="no"/>
+  </object>
+  <object class="GtkMenu" id="menu1">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
   </object>
   <object class="GtkWindow" id="window">
     <property name="visible">True</property>
@@ -57,6 +63,7 @@
                       <object class="GtkImageMenuItem" id="menu_open">
                         <property name="label">gtk-open</property>
                         <property name="use_action_appearance">False</property>
+                        <property name="related_action">ouvrir</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
@@ -167,6 +174,20 @@
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">_Affichage</property>
                 <property name="use_underline">True</property>
+                <child type="submenu">
+                  <object class="GtkMenu" id="menu2">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkImageMenuItem" id="menu_charger_ui">
+                        <property name="related_action">load_ui</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_stock">True</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
               </object>
             </child>
             <child>
@@ -215,7 +236,6 @@
                 <property name="related_action">ouvrir</property>
                 <property name="label" translatable="yes">Ouvrir</property>
                 <property name="use_underline">True</property>
-                <signal name="clicked" handler="load_scm_file" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -230,7 +250,6 @@
                 <property name="related_action">load_ui</property>
                 <property name="label" translatable="yes">Change UI</property>
                 <property name="use_underline">True</property>
-                <signal name="clicked" handler="cb_load_ui" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>

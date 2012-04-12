@@ -52,7 +52,7 @@ wrapper_handler_proc (gpointer data, SCM key, SCM param)
  * pour toute la calculette
  */
 void
-load_scm_file (GObject* btn, gpointer data)
+load_scm_file (GtkAction* btn, gpointer data)
 {
 	GtkFileFilter *filter;
 	GtkWidget *chooser;

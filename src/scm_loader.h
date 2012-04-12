@@ -23,6 +23,6 @@
 #include <libguile.h>
 #include "calc.h"
 
-void load_scm_file (GObject* btn, gpointer data);
+void load_scm_file (GtkAction* btn, gpointer data);
 
 #endif
